@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SELKIT Poster - 700x570</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Cute Pink Music Note - https://www.cursors-4u.com/cursor/cute-pink-music-note */
+  * {
+    cursor: url('https://cdn.cursors-4u.net/css-previews/cute-pink-music-note-97d74f8f-css.webp') 5 0, auto !important;
+  }
+  /* End www.Cursors-4U.com Code */
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F9F9FB;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
+  /* =========================================================
+     CONTENEDOR FIJO CON ESCALADO RESPONSIVO AUTOMÁTICO
+  ========================================================= */
+  .scale-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+  }
+
+  .ui-container {
+    width: 700px;
+    height: 570px;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 40px rgba(244, 167, 193, 0.4);
+    /* El escalado ocurre mediante media queries si la pantalla es menor a 750px */
+    transform-origin: center center;
+  }
+
+  @media (max-width: 768px) {
+    .ui-container {
+      transform: scale(calc(100vw / 750));
+    }
+  }
+
+  @media (max-height: 600px) {
+    .ui-container {
+      transform: scale(calc(100vh / 620));
+    }
+  }
+
+  /* Animación para el cover de música girando */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 4s linear infinite;
+  }
+  
+  /* Animación continua del vinilo */
+  .vinyl-spin {
+    animation: spin-slow 4s linear infinite;
+  }
+
+  /* Animación de entrada para burbujas de chat */
+  .chat-bubble-anim {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .chat-bubble-anim.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Animación de brillo animado sutil para el texto SELKIT */
+  .glow-text {
+    color: #FF6FAE;
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.6),
+      0 0 20px rgba(244, 167, 193, 0.8),
+      0 0 30px rgba(244, 167, 193, 0.6),
+      1px 1px 0px #F4A7C1,
+      2px 2px 0px #FF6FAE,
+      3px 3px 0px #7EC8E3,
+      4px 4px 0px #5FA7D6,
+      5px 5px 15px rgba(247, 228, 218, 0.8);
+    animation: neon-pulse 3s infinite alternate;
+  }
+
+  @keyframes neon-pulse {
+    0% { text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(244,167,193,0.7), 0 0 30px rgba(244,167,193,0.5), 1px 1px 0px #F4A7C1, 2px 2px 0px #FF6FAE, 3px 3px 0px #7EC8E3, 4px 4px 0px #5FA7D6, 5px 5px 15px rgba(247,228,218,0.7); }
+    100% { text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 25px rgba(255,111,174,1), 0 0 45px rgba(255,111,174,0.9), 1px 1px 0px #F4A7C1, 2px 2px 0px #FF6FAE, 3px 3px 0px #7EC8E3, 4px 4px 0px #5FA7D6, 5px 5px 20px rgba(247,228,218,0.9); }
+  }
+
+  /* Partículas musicales locales para el título */
+  .title-particle {
+    position: absolute;
+    color: #7EC8E3;
+    font-size: 14px;
+    text-shadow: 0 0 10px rgba(247, 228, 218, 0.8), 0 0 20px rgba(255, 111, 174, 0.9);
+    pointer-events: none;
+    opacity: 0;
+    z-index: -1;
+  }
+  .tp-1 { left: -5%; top: 10%; animation: tp-float1 3s infinite ease-in-out; }
+  .tp-2 { left: 45%; top: 80%; animation: tp-float2 4s infinite ease-in-out 1s; }
+  .tp-3 { left: 95%; top: 20%; animation: tp-float3 3.5s infinite ease-in-out 0.5s; }
+
+  @keyframes tp-float1 {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 1; text-shadow: 0 0 15px #fff; }
+    100% { transform: translate(-15px, -30px) scale(1.2) rotate(-20deg); opacity: 0; }
+  }
+  @keyframes tp-float2 {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 1; text-shadow: 0 0 15px #fff; }
+    100% { transform: translate(20px, -25px) scale(1) rotate(15deg); opacity: 0; }
+  }
+  @keyframes tp-float3 {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 1; text-shadow: 0 0 15px #fff; }
+    100% { transform: translate(10px, -40px) scale(1.3) rotate(10deg); opacity: 0; }
+  }
+
+  /* Animación para partículas/notas flotantes DENTRO del canvas */
+  @keyframes float-particles {
+    0% { transform: translateY(600px) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: var(--max-op); }
+    90% { opacity: var(--max-op); }
+    100% { transform: translateY(-50px) translateX(var(--drift)) rotate(360deg); opacity: 0; }
+  }
+
+  /* Glow profesional para los renders */
+  .render-glow {
+    filter: drop-shadow(0 0 25px rgba(244, 167, 193, 0.5)) drop-shadow(0 0 10px rgba(126, 200, 227, 0.3));
+  }
+
+  /* =========================================
+     NUEVAS CLASES: ZOOM CARD Y COLLAPSED PLAYER
+  ========================================= */
+  .zoomed-card {
+    transform: scale(1.25) translateY(0) !important;
+    z-index: 100 !important;
+    backdrop-filter: blur(16px) !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .player-collapsed {
+    width: 44px !important;
+  }
+  .player-collapsed #player-controls-wrap {
+    opacity: 0 !important;
+    width: 0 !important;
+    pointer-events: none;
+    transform: translateX(-10px);
+  }
+  .player-collapsed #progress-container {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- Fondo Animado Principal (Fuera del recuadro, pantalla completa) -->
+  <div class="fixed inset-0 z-[1] bg-[#F9F9FB] overflow-hidden pointer-events-none">
+    <video src="https://cdn.pixabay.com/video/2024/02/02/199015-909322188_large.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen saturate-100"></video>
+    <div class="absolute inset-0 bg-[#7EC8E3] mix-blend-color opacity-30"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#F9F9FB_100%)] opacity-80"></div>
+  </div>
+
+  <!-- PANTALLA DE INICIO (SPLASH) -->
+  <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#F9F9FB] transition-opacity duration-1000 overflow-hidden">
+    
+    <!-- NUEVO VIDEO DE FONDO: object-fit cover, autoplay, loop, muted -->
+    <video src="https://i.imgur.com/S2Eaats.mp4" autoplay loop muted playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0"></video>
+    
+    <!-- SUBTLE DARK OVERLAY PARA MEJORAR LECTURA -->
+    <div class="absolute inset-0 bg-black/30 z-0 pointer-events-none"></div>
+    
+    <div class="relative z-10 flex flex-col items-center justify-center h-full">
+      <button id="enter-btn" class="px-12 py-4 rounded-full bg-[#FF6FAE]/90 backdrop-blur-md border border-[#F4A7C1]/50 text-white font-medium tracking-[0.15em] hover:bg-[#FF6FAE] transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,111,174,0.3)] hover:shadow-[0_0_30px_rgba(255,111,174,0.5)] hover:border-white/60 active:scale-95 text-sm">INGRESAR</button>
+    </div>
+  </div>
+
+  <!-- ENVOLTORIO PARA CENTRAR Y ESCALAR EL RECUADRO DE 700x570 -->
+  <div class="scale-wrapper">
+    <div class="ui-container group bg-[#F9F9FB]">
+      
+      <!-- Fondo y Renders dentro del recuadro -->
+      <!--
+      ==== HERO RENDER CONFIGURATION ====
+      Place your hero images in the same directory as the website.
+      Replace the following files to update the renders automatically:
+      render1.png
+      render2.png
+      render3.png
+      render4.png
+      render5.png
+      render6.png
+      If you replace these files in GitHub, the website will automatically show the new renders.
+      -->
+      <div class="absolute inset-0 w-full h-full z-0 transition-transform duration-700 group-hover:scale-[1.03]">
+        <img src="render1.png" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-100" alt="Hero Render 1" />
+        <img src="render2.png" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-0" alt="Hero Render 2" />
+        <img src="render3.png" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-0" alt="Hero Render 3" />
+        <img src="render4.png" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-0" alt="Hero Render 4" />
+        <img src="render5.png" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-0" alt="Hero Render 5" />
+        <img src="render6.png" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" class="hero-render render-glow absolute inset-0 w-full h-full object-contain object-center transition-opacity duration-1000 opacity-0" alt="Hero Render 6" />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-br from-[#7EC8E3]/40 via-[#F7E4DA]/50 to-[#F4A7C1]/40 pointer-events-none z-[2]"></div>
+
+      <!-- Área interactiva para ocultar/mostrar widgets al hacer clic en el fondo -->
+      <div id="bg-toggle-area" class="absolute inset-0 z-[10] cursor-pointer" title="Click para ocultar/mostrar paneles"></div>
+
+      <!-- Partículas confinadas dentro del recuadro -->
+      <div id="particles-container" class="absolute inset-0 z-[3] pointer-events-none overflow-hidden"></div>
+
+      <!-- Flecha para cambiar render (Derecha, siguiente) -->
+      <button id="next-render-btn" class="widget-panel absolute top-[65%] -translate-y-1/2 right-4 w-10 h-10 rounded-full bg-[#7EC8E3]/80 backdrop-blur-md border border-white/50 flex items-center justify-center text-white transition-all duration-500 hover:bg-[#5FA7D6] hover:scale-110 active:scale-95 shadow-[0_0_15px_rgba(126,200,227,0.4)] z-30 opacity-40 hover:opacity-100 group/arrow">
+        <svg class="w-5 h-5 fill-current transition-transform duration-300 group-hover/arrow:translate-x-0.5" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+
+      <!-- Top left label -->
+      <div class="widget-panel absolute top-6 left-6 text-[#FF6FAE] text-[10px] font-semibold tracking-widest opacity-90 cursor-default leading-tight drop-shadow-sm z-20 transition-opacity duration-500">
+        MUSIC<br/>LOVER
+      </div>
+
+      <!-- Burbujas de chat (Notificación + Despliegue) -->
+      <div class="widget-panel absolute top-6 right-6 z-20 flex flex-col items-end transition-opacity duration-500">
+        
+        <!-- Notificación inicial -->
+        <button id="chat-notification" class="bg-[#FF6FAE]/90 text-white px-3 py-1.5 rounded-full backdrop-blur-md shadow-md border border-white/50 flex items-center gap-2 hover:bg-[#FF6FAE] transition-all duration-300 cursor-pointer animate-pulse">
+          <span class="text-[10px] font-medium tracking-wide">Mensaje Nuevo</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+        </button>
+
+        <!-- Mensajes reales ocultos -->
+        <div id="chat-messages" class="hidden flex-col items-end cursor-default transition-transform duration-500 hover:-translate-y-1">
+          <div class="chat-bubble-anim bg-white/60 text-[#3A3A3A] px-3 py-2 rounded-xl backdrop-blur-md shadow-sm border border-white/40 mb-1 flex flex-col items-start w-max">
+            <span class="text-[8px] text-[#8B5A3C] leading-none mb-0.5">Lynae</span>
+            <span class="text-[12px] font-semibold leading-none">Hey!</span>
+          </div>
+          <div class="chat-bubble-anim text-[#3A3A3A] text-[10px] my-1 opacity-90 drop-shadow-sm mr-1">
+            I think I love you
+          </div>
+          <div class="chat-bubble-anim bg-[#7EC8E3]/90 text-white px-3 py-1.5 rounded-xl backdrop-blur-md shadow-sm border border-white/40 transition-transform duration-300 hover:scale-105 hover:bg-[#5FA7D6] mt-1 flex flex-col items-start w-max">
+            <span class="text-[8px] text-[#F9F9FB] leading-none mb-0.5">Amy</span>
+            <span class="font-semibold text-[12px] leading-none">AYYO CHILL!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Etymology panel (Medio Izquierda - AHORA CON ZOOM INTERACTIVO) -->
+      <div id="selkit-card" class="widget-panel absolute left-6 top-[130px] w-[190px] bg-white/50 text-[#3A3A3A] p-3 rounded-xl backdrop-blur-md leading-snug border border-white/50 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/70 cursor-pointer z-20 origin-center">
+        <div class="font-semibold text-[11px] mb-1 text-[#3A3A3A]">Selkit</div>
+        <div class="text-[8px] text-[#6B6B6B] leading-[1.4]">
+          Me muevo en una frecuencia que pocos sintonizan. Dicen que mi mente es una partitura que el mundo no sabe leer; soy el pulso detrás de cada nota. Puedo ser la voz más dulce que escuches hoy o la tormenta que no viste venir, pero siempre seré la lealtad que acompaña tu soledad. Soy el eco de lo que el silencio no puede contener.
+        </div>
+        <div class="h-px bg-[#8B5A3C]/20 mt-2"></div>
+      </div>
+
+      <!-- Information panel (Abajo Izquierda, sobre el título) -->
+      <div class="widget-panel absolute left-6 bottom-[130px] w-[190px] bg-white/50 text-[#3A3A3A] p-3 rounded-xl backdrop-blur-md border border-white/50 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/70 cursor-default z-20">
+        <div class="font-semibold text-[11px] mb-2">Information</div>
+        <div class="grid grid-cols-2 gap-y-2 gap-x-2">
+          <div class="flex items-center gap-1.5">
+            <img src="https://i.ibb.co/jPQd2b4Y/img-icons8.png" alt="Element" class="w-5 h-5 object-contain opacity-90" />
+            <div class="text-[9px] text-[#6B6B6B]">Element</div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <img src="https://i.ibb.co/67d0QSqK/music.png" alt="Power" class="w-5 h-5 object-contain opacity-90" />
+            <div class="text-[9px] text-[#6B6B6B]">Power</div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <img src="https://i.ibb.co/mChj9KjQ/leo2.png" alt="Zodiac" class="w-5 h-5 object-contain opacity-90" />
+            <div class="text-[9px] text-[#6B6B6B]">Zodiac</div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <img src="https://i.ibb.co/WNstLqcS/mexico.png" alt="Nation" class="w-5 h-5 object-contain opacity-90" />
+            <div class="text-[9px] text-[#6B6B6B]">Nation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile card (Medio Derecha) -->
+      <div class="widget-panel absolute right-6 top-[150px] w-[150px] bg-white/50 text-[#3A3A3A] p-3 rounded-xl backdrop-blur-md border border-white/50 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/70 z-20">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-white/60 border border-white/60 overflow-hidden shrink-0 cursor-pointer hover:scale-110 transition-transform">
+            <img src="https://i.imgur.com/9rdW1Lq.jpeg" class="w-full h-full object-cover" alt="Avatar"/>
+          </div>
+          <div class="cursor-default flex-1 overflow-hidden">
+            <div class="font-semibold text-[12px] text-[#3A3A3A] truncate">Lynae</div>
+            <div class="text-[8px] text-[#8B5A3C] truncate">@Blahblahblu</div>
+          </div>
+          <button class="text-[#8B5A3C] hover:text-[#FF6FAE] transition-colors text-sm active:scale-90">≡</button>
+        </div>
+        
+        <div class="flex justify-between mt-3 text-center cursor-default">
+          <div>
+            <div class="font-semibold text-[12px] text-[#3A3A3A]">86</div>
+            <div class="text-[7px] text-[#8B5A3C]">Following</div>
+          </div>
+          <div>
+            <div class="font-semibold text-[12px] text-[#3A3A3A]">4500</div>
+            <div class="text-[7px] text-[#8B5A3C]">Followers</div>
+          </div>
+          <div>
+            <div class="font-semibold text-[12px] text-[#3A3A3A]">100</div>
+            <div class="text-[7px] text-[#8B5A3C]">Likes</div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-3 gap-1 mt-2">
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/HnTzlUx.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 1"/></div>
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/irKItNk.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 2"/></div>
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/cESV5Gf.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 3"/></div>
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/a9xN7mi.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 4"/></div>
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/USXJ9fm.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 5"/></div>
+          <div class="aspect-square rounded-[4px] bg-white/60 overflow-hidden"><img src="https://i.imgur.com/0KPqRpg.jpeg" class="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-110 transition-all cursor-pointer feed-img" alt="Thumb 6"/></div>
+        </div>
+      </div>
+
+      <!-- Título Inferior Izquierdo SELKIT -->
+      <div class="widget-panel absolute left-6 bottom-6 text-[#3A3A3A] cursor-default z-20 transition-opacity duration-500">
+        <div class="text-[54px] font-semibold tracking-[0.2em] leading-none glow-text transition-all hover:tracking-[0.22em] relative inline-block">
+          SELKIT
+          <span class="title-particle tp-1">♪</span>
+          <span class="title-particle tp-2">♫</span>
+          <span class="title-particle tp-3">✦</span>
+        </div>
+        <div class="text-[9px] w-[260px] text-[#8B5A3C] mt-1.5 drop-shadow-sm leading-[1.3]">ID:773986656</div>
+      </div>
+
+      <!-- Contenedor Botones (Abajo Derecha) -->
+      <div class="widget-panel absolute right-6 bottom-6 flex flex-col items-end gap-3 z-20 transition-opacity duration-500">
+        
+        <!-- Panel Colapsable de YouTube -->
+        <div id="yt-wrapper" class="grid transition-all duration-500 w-[240px]" style="grid-template-rows: 0fr;">
+          <div class="overflow-hidden w-full">
+            <div class="w-full bg-white/50 backdrop-blur-md border border-white/50 rounded-2xl p-3 shadow-sm flex flex-col gap-2 mb-1">
+              <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">YouTube Embed</label>
+              <!-- Contenedor de Embed Manual -->
+              <div id="yt-embed-container" class="w-full aspect-video bg-black/5 rounded-xl overflow-hidden border border-white/40">
+                <!-- INSERTA TU CÓDIGO IFRAME DE YOUTUBE AQUÍ ABAJO -->
+                <iframe id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/jfKfPfyJRdk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón YouTube -->
+        <button id="yt-toggle-btn" class="w-9 h-9 rounded-full bg-white/50 backdrop-blur-md border border-white/50 flex items-center justify-center text-[#FF6FAE] transition-all hover:bg-white/70 shadow-sm group" aria-label="YouTube">
+          <svg class="w-4 h-4 transition-transform duration-500 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+        </button>
+
+        <!-- Botón Musical Único -->
+        <a href="https://xat.com/radiohispano" target="_blank" class="w-9 h-9 rounded-full bg-[#FF6FAE]/90 backdrop-blur-md border border-[#F4A7C1]/50 flex items-center justify-center text-white text-lg transition-all hover:bg-[#FF6FAE] shadow-md group" aria-label="Radio">
+          <span class="transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12">♫</span>
+        </a>
+      </div>
+
+      <!-- Reproductor de Música Collapsible (Default Collapse) -->
+      <!--
+      ==== MUSIC PLAYER CONFIGURATION ====
+      Place your audio files in the same directory.
+      Default track used by the player:
+      track1.mp3
+      To change the music, simply replace this file in the repository.
+      Optional additional tracks can follow the format:
+      track2.mp3
+      track3.mp3
+      -->
+      <div id="music-player-wrapper" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-[80] player-collapsed w-[280px] transition-all duration-500">
+        <div class="bg-white/50 backdrop-blur-md border border-white/50 rounded-[24px] p-1.5 flex items-center shadow-sm transition-all hover:bg-white/70 w-full relative h-[44px]">
+          <audio id="audio-player" src="track1.mp3" preload="metadata"></audio>
+          
+          <!-- Botón Vinyl Cover -->
+          <div class="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-[#FF6FAE] shadow-[0_0_8px_rgba(255,111,174,0.4)] ml-0 cursor-pointer hover:scale-105 transition-transform" id="cover-container" title="Click para expandir/colapsar el reproductor">
+            <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover vinyl-spin" id="cover-img" />
+            <div class="absolute inset-0 m-auto w-[6px] h-[6px] bg-[#F9F9FB] rounded-full shadow-inner pointer-events-none"></div>
+          </div>
+          
+          <!-- Contenido del Reproductor Expandido -->
+          <div id="player-controls-wrap" class="flex items-center gap-2 overflow-hidden w-full opacity-100 ml-2 transition-all duration-500">
+            <div class="flex flex-col flex-1 overflow-hidden cursor-default justify-center">
+              <div class="text-[11px] font-semibold text-[#3A3A3A] whitespace-nowrap truncate leading-tight" title="Samantha Barrón - Dibújame">Samantha Barrón - Dibújame</div>
+              <div class="text-[8px] text-[#6B6B6B] whitespace-nowrap truncate leading-tight" title="Feat. Nanpa Básico">Feat. Nanpa Básico</div>
+            </div>
+            
+            <button id="play-pause-btn" class="w-8 h-8 shrink-0 flex items-center justify-center text-white bg-[#FF6FAE]/90 hover:bg-[#F4A7C1] rounded-full transition-all active:scale-90">
+              <svg id="play-icon" class="w-3.5 h-3.5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="pause-icon" class="w-3.5 h-3.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+
+            <!-- Control de Volumen -->
+            <div class="flex items-center gap-1 mr-1 shrink-0">
+              <button id="mute-btn" class="text-[#8B5A3C] hover:text-[#FF6FAE] transition-colors outline-none" title="Silenciar">
+                <svg id="vol-icon-up" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                <svg id="vol-icon-mute" class="w-3.5 h-3.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+              </button>
+              <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" class="w-10 h-1 bg-[#8B5A3C]/20 rounded-full appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:bg-[#FF6FAE] [&::-webkit-slider-thumb]:rounded-full hover:[&::-webkit-slider-thumb]:scale-125 transition-all">
+            </div>
+          </div>
+          
+          <!-- Progress Bar integrada discretamente al fondo de la pastilla -->
+          <div class="absolute bottom-0 left-4 right-4 h-[2px] bg-[#8B5A3C]/20 rounded-full overflow-hidden cursor-pointer transition-opacity duration-300" id="progress-container">
+            <div id="progress-bar" class="h-full bg-[#7EC8E3] w-0 pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- NUEVA SECCIÓN: PANEL DE CONTROL (COLAPSABLE) -->
+  <div id="control-panel-section" class="w-full flex flex-col items-center justify-center py-8 relative z-10 bg-transparent">
+    <div class="relative w-full max-w-sm bg-white/50 backdrop-blur-md border border-white/50 rounded-[24px] shadow-[0_15px_40px_-10px_rgba(244,167,193,0.3)] flex flex-col items-center">
+      
+      <!-- Cabecera Colapsable -->
+      <div id="cp-header" class="w-full py-4 cursor-pointer flex items-center justify-center hover:bg-white/40 transition-colors rounded-[24px] z-10">
+        <span class="text-xs font-semibold text-[#3A3A3A] tracking-[0.2em] flex items-center gap-2">
+          PANEL DE CONTROL
+          <svg id="cp-chevron" class="w-4 h-4 text-[#8B5A3C] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </span>
+      </div>
+
+      <!-- Contenedor Animado -->
+      <div id="cp-wrapper" class="grid transition-all duration-500 w-full" style="grid-template-rows: 0fr;">
+        <div class="overflow-hidden w-full flex flex-col items-center">
+          <div class="w-full px-8 pb-8 flex flex-col items-center">
+            
+            <div id="cp-login-form" class="flex flex-col items-center w-full mt-2">
+              <p class="text-[12px] text-[#8B5A3C] mb-6 tracking-wide font-medium">Acceso restringido</p>
+              
+              <input type="password" id="cp-password" placeholder="Password" class="w-full px-4 py-3 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-center mb-4 shadow-sm transition-all text-sm placeholder-[#6B6B6B]" />
+              
+              <button id="cp-submit" class="w-full py-3 rounded-xl bg-[#FF6FAE]/90 text-white font-medium tracking-widest hover:bg-[#FF6FAE] transition-all duration-300 hover:scale-[1.02] shadow-[0_0_15px_rgba(255,111,174,0.3)] hover:shadow-[0_0_25px_rgba(255,111,174,0.5)] active:scale-95 text-sm">INGRESAR</button>
+              
+              <p id="cp-error" class="text-[10px] text-[#FF6FAE] mt-3 opacity-0 transition-opacity duration-300 font-medium">Contraseña incorrecta</p>
+            </div>
+
+            <!-- Contenido Seguro (Oculto por defecto) -->
+            <div id="cp-content" class="hidden flex-col items-center w-full mt-2 text-center">
+              
+              <div class="w-full flex flex-col gap-3 mb-4 text-left">
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 1 URL</label>
+                  <input type="text" id="feed-url-1" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 2 URL</label>
+                  <input type="text" id="feed-url-2" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 3 URL</label>
+                  <input type="text" id="feed-url-3" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 4 URL</label>
+                  <input type="text" id="feed-url-4" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 5 URL</label>
+                  <input type="text" id="feed-url-5" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">Feed Image 6 URL</label>
+                  <input type="text" id="feed-url-6" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL de la imagen" />
+                </div>
+              </div>
+              
+              <button id="cp-update-feed" class="w-full py-3 rounded-xl bg-[#7EC8E3]/90 text-white font-medium tracking-widest hover:bg-[#7EC8E3] transition-all duration-300 hover:scale-[1.02] shadow-[0_0_15px_rgba(126,200,227,0.3)] hover:shadow-[0_0_25px_rgba(126,200,227,0.5)] active:scale-95 text-sm">Actualizar Feed</button>
+              <p id="cp-success" class="text-[10px] text-[#5FA7D6] mt-3 opacity-0 transition-opacity duration-300 font-medium">Feed actualizado correctamente</p>
+
+              <div class="h-px w-full bg-[#8B5A3C]/20 my-2"></div>
+
+              <div class="w-full flex flex-col gap-3 mb-4 text-left">
+                <div>
+                  <label class="text-[10px] text-[#8B5A3C] font-semibold ml-1">YouTube Video URL</label>
+                  <input type="text" id="cp-yt-url" class="w-full px-3 py-2 rounded-xl bg-white/60 border border-white/50 focus:outline-none focus:border-[#FF6FAE] focus:ring-1 focus:ring-[#FF6FAE] text-[#3A3A3A] text-xs shadow-sm transition-all placeholder-[#6B6B6B]" placeholder="URL del video o embed" />
+                </div>
+              </div>
+
+              <button id="cp-update-yt" class="w-full py-3 rounded-xl bg-[#7EC8E3]/90 text-white font-medium tracking-widest hover:bg-[#7EC8E3] transition-all duration-300 hover:scale-[1.02] shadow-[0_0_15px_rgba(126,200,227,0.3)] hover:shadow-[0_0_25px_rgba(126,200,227,0.5)] active:scale-95 text-sm">Actualizar Video</button>
+              <p id="cp-yt-success" class="text-[10px] text-[#5FA7D6] mt-3 opacity-0 transition-opacity duration-300 font-medium">Video actualizado correctamente</p>
+
+              <button id="cp-logout" class="mt-4 text-[10px] text-[#8B5A3C] hover:text-[#FF6FAE] transition-colors font-medium underline">Cerrar Sesión</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SIGNATURE -->
+  <div class="w-full text-center pb-6 pt-2 text-[10px] text-[#8B5A3C] opacity-60 tracking-wider font-medium z-10 relative">
+    ©2026 Eam96 Xatspace Design
+  </div>
+
+  <!-- MODAL PARA AGRANDAR IMÁGENES -->
+  <div id="image-modal" class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm hidden items-center justify-center opacity-0 transition-opacity duration-300">
+    <button id="close-modal" class="absolute top-6 right-6 text-white text-4xl hover:scale-110 transition-transform cursor-pointer">&times;</button>
+    <img id="modal-img" src="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl scale-95 transition-transform duration-300" />
+  </div>
+
+  <script>
+    // ===== PROTECCIÓN BÁSICA DEL CLIENTE (Anti-Click Derecho y DevTools) =====
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      // Bloquear F12
+      if (e.key === 'F12') e.preventDefault();
+      // Bloquear Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) e.preventDefault();
+      // Bloquear Ctrl+U (Ver código fuente)
+      if (e.ctrlKey && ['U', 'u'].includes(e.key)) e.preventDefault();
+      // Bloquear Cmd+Option+I, Cmd+Option+J, Cmd+Option+C (Mac)
+      if (e.metaKey && e.altKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) e.preventDefault();
+      // Bloquear Cmd+Option+U o Cmd+U (Mac ver código fuente)
+      if (e.metaKey && ['U', 'u'].includes(e.key)) e.preventDefault();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // ===== LÓGICA DEL SPLASH SCREEN =====
+      const splashScreen = document.getElementById('splash-screen');
+      const enterBtn = document.getElementById('enter-btn');
+
+      enterBtn.addEventListener('click', () => {
+        splashScreen.style.opacity = '0';
+        splashScreen.style.pointerEvents = 'none';
+      });
+
+      // ===== LÓGICA DE NOTIFICACIÓN DE CHAT =====
+      const chatNotification = document.getElementById('chat-notification');
+      const chatMessages = document.getElementById('chat-messages');
+      const chatBubbles = document.querySelectorAll('.chat-bubble-anim');
+
+      chatNotification.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evitar que el clic active la ocultación de widgets
+        chatNotification.style.display = 'none';
+        chatMessages.classList.remove('hidden');
+        chatMessages.classList.add('flex');
+        
+        setTimeout(() => {
+          chatBubbles.forEach((bubble, index) => {
+            setTimeout(() => {
+              bubble.classList.add('show');
+            }, index * 350); 
+          });
+        }, 100); 
+      });
+
+      // ===== SELKIT CARD ZOOM LOGIC =====
+      const selkitCard = document.getElementById('selkit-card');
+      
+      selkitCard.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selkitCard.classList.toggle('zoomed-card');
+      });
+
+      // ===== OCULTAR/MOSTRAR WIDGETS AL HACER CLIC EN EL FONDO =====
+      const bgToggleArea = document.getElementById('bg-toggle-area');
+      const widgetPanels = document.querySelectorAll('.widget-panel');
+      let isUiVisible = true;
+
+      bgToggleArea.addEventListener('click', () => {
+        // If the card is zoomed, simply unzoom it without hiding the entire UI.
+        if (selkitCard.classList.contains('zoomed-card')) {
+          selkitCard.classList.remove('zoomed-card');
+          return;
+        }
+
+        isUiVisible = !isUiVisible;
+        widgetPanels.forEach(panel => {
+          if(isUiVisible) {
+            panel.style.opacity = '1';
+            panel.style.pointerEvents = 'auto';
+          } else {
+            panel.style.opacity = '0';
+            panel.style.pointerEvents = 'none';
+          }
+        });
+      });
+
+      // ===== YOUTUBE PANEL LOGIC =====
+      const ytToggleBtn = document.getElementById('yt-toggle-btn');
+      const ytWrapper = document.getElementById('yt-wrapper');
+      
+      let isYtOpen = false;
+
+      ytToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isYtOpen = !isYtOpen;
+        ytWrapper.style.gridTemplateRows = isYtOpen ? '1fr' : '0fr';
+      });
+
+      ytWrapper.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents main UI from hiding when interacting with the panel
+      });
+
+      // ===== LÓGICA DE PARTÍCULAS / NOTAS FLOTANTES DE FONDO =====
+      const symbols = ['✦', '✧', '♪', '♫', '°', '.', '·', '⋆'];
+      const particlesContainer = document.getElementById('particles-container');
+      
+      for(let i = 0; i < 40; i++) { 
+        const p = document.createElement('div');
+        p.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        p.className = 'absolute text-[#F4A7C1] pointer-events-none drop-shadow-[0_0_8px_rgba(255,111,174,0.6)] opacity-0';
+        
+        const size = Math.random() * 12 + 4; 
+        const left = Math.random() * 700; // Ancho del contenedor
+        const duration = Math.random() * 15 + 10; 
+        const delay = Math.random() * 10;
+        const maxOp = Math.random() * 0.4 + 0.1;
+        const drift = (Math.random() - 0.5) * 60;
+        
+        p.style.fontSize = `${size}px`;
+        p.style.left = `${left}px`;
+        p.style.setProperty('--max-op', maxOp);
+        p.style.setProperty('--drift', `${drift}px`);
+        p.style.animation = `float-particles ${duration}s linear infinite ${delay}s`;
+        
+        particlesContainer.appendChild(p);
+      }
+
+      // ===== CURSOR MÁGICO MUSICAL (Actualizado con colores dinámicos) =====
+      let lastParticleTime = 0;
+      const cursorSymbols = ['♪', '♫', '✦', '✧', '⋆'];
+      
+      const createCursorParticle = (x, y) => {
+        const now = Date.now();
+        if (now - lastParticleTime < 40) return;
+        lastParticleTime = now;
+
+        // Paleta dinámica de colores pastel solicitados
+        const palette = [
+          { color: '#F4A7C1', shadow: 'rgba(244,167,193,0.9)' },
+          { color: '#FF6FAE', shadow: 'rgba(255,111,174,0.9)' },
+          { color: '#7EC8E3', shadow: 'rgba(126,200,227,0.9)' },
+          { color: '#F7E4DA', shadow: 'rgba(247,228,218,0.9)' }
+        ];
+        const theme = palette[Math.floor(Math.random() * palette.length)];
+
+        const p = document.createElement('div');
+        p.innerText = cursorSymbols[Math.floor(Math.random() * cursorSymbols.length)];
+        
+        // ELIMINADO: 'mix-blend-screen' (causaba que los colores claros se volvieran blancos puros contra el fondo claro)
+        p.className = 'fixed pointer-events-none z-[150]'; 
+        
+        // Asignación de color estricta
+        p.style.color = theme.color;
+        p.style.textShadow = `0 0 6px ${theme.color}`; // Refuerzo extra de color para el brillo
+        p.style.filter = `drop-shadow(0 0 8px ${theme.shadow})`;
+        
+        p.style.left = `${x}px`;
+        p.style.top = `${y}px`;
+        p.style.fontSize = `${Math.random() * 14 + 12}px`; 
+        p.style.transition = 'transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease-out';
+        p.style.transform = 'translate(-50%, -50%) scale(1)';
+        p.style.opacity = '0.9';
+        
+        document.body.appendChild(p);
+
+        requestAnimationFrame(() => {
+          const tx = (Math.random() - 0.5) * 80;
+          const ty = -Math.random() * 80 - 30; 
+          p.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.3) rotate(${Math.random() * 180 - 90}deg)`;
+          p.style.opacity = '0';
+        });
+
+        setTimeout(() => p.remove(), 1200);
+      };
+
+      // Funciona al mover el ratón (PC)
+      window.addEventListener('mousemove', (e) => {
+        createCursorParticle(e.clientX, e.clientY);
+      });
+
+      // Funciona al arrastrar el dedo (Móvil / Tablet)
+      window.addEventListener('touchmove', (e) => {
+        if(e.touches.length > 0) {
+          createCursorParticle(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      // ===== LÓGICA DEL MODAL DE IMÁGENES FEED =====
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const closeModalBtn = document.getElementById('close-modal');
+      const feedImages = document.querySelectorAll('.feed-img');
+
+      feedImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+          e.stopPropagation(); 
+          const highResUrl = img.src.replace('&w=100', '&w=1080');
+          modalImg.src = highResUrl;
+          
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          void modal.offsetWidth; 
+          modal.classList.remove('opacity-0');
+          modalImg.classList.remove('scale-95');
+          modalImg.classList.add('scale-100');
+        });
+      });
+
+      const closeModal = () => {
+        modal.classList.add('opacity-0');
+        modalImg.classList.remove('scale-100');
+        modalImg.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }, 300);
+      };
+
+      closeModalBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(); 
+      });
+
+      // ===== CAMBIO DE RENDER (SLIDER 6 IMÁGENES) =====
+      const nextBtn = document.getElementById('next-render-btn');
+      const heroRenders = document.querySelectorAll('.hero-render');
+      let currentRenderIdx = 0;
+
+      const updateSlider = () => {
+        heroRenders.forEach((render, index) => {
+          if (index === currentRenderIdx) {
+            render.style.opacity = '1';
+          } else {
+            render.style.opacity = '0';
+          }
+        });
+      };
+
+      nextBtn.addEventListener('click', () => {
+        currentRenderIdx = (currentRenderIdx + 1) % heroRenders.length;
+        updateSlider();
+      });
+
+      // ===== LÓGICA DEL REPRODUCTOR DE MÚSICA (COLLAPSIBLE) =====
+      const audio = document.getElementById('audio-player');
+      const playPauseBtn = document.getElementById('play-pause-btn');
+      const playIcon = document.getElementById('play-icon');
+      const pauseIcon = document.getElementById('pause-icon');
+      const progressContainer = document.getElementById('progress-container');
+      const progressBar = document.getElementById('progress-bar');
+      const volumeSlider = document.getElementById('volume-slider');
+      const muteBtn = document.getElementById('mute-btn');
+      const volIconUp = document.getElementById('vol-icon-up');
+      const volIconMute = document.getElementById('vol-icon-mute');
+      
+      const playerWrapper = document.getElementById('music-player-wrapper');
+      const coverContainer = document.getElementById('cover-container');
+      
+      let previousVolume = 1;
+      let isPlaying = false;
+
+      // Expandir/Colapsar al hacer clic en el vinilo
+      coverContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playerWrapper.classList.toggle('player-collapsed');
+      });
+
+      function togglePlay() {
+        if (isPlaying) {
+          audio.pause();
+          playIcon.classList.remove('hidden');
+          pauseIcon.classList.add('hidden');
+        } else {
+          audio.play();
+          playIcon.classList.add('hidden');
+          pauseIcon.classList.remove('hidden');
+        }
+        isPlaying = !isPlaying;
+      }
+
+      playPauseBtn.addEventListener('click', togglePlay);
+
+      audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+          const progressPercent = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = `${progressPercent}%`;
+        }
+      });
+
+      progressContainer.addEventListener('click', (e) => {
+        const width = progressContainer.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        audio.currentTime = (clickX / width) * duration;
+        
+        if (!isPlaying) togglePlay(); 
+      });
+
+      audio.addEventListener('ended', () => {
+        isPlaying = false;
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        progressBar.style.width = '0%';
+      });
+
+      // Lógica del Control de Volumen
+      volumeSlider.addEventListener('input', (e) => {
+        const vol = parseFloat(e.target.value);
+        audio.volume = vol;
+        if (vol === 0) {
+          volIconUp.classList.add('hidden');
+          volIconMute.classList.remove('hidden');
+        } else {
+          volIconUp.classList.remove('hidden');
+          volIconMute.classList.add('hidden');
+        }
+      });
+
+      muteBtn.addEventListener('click', () => {
+        if (audio.volume > 0) {
+          previousVolume = audio.volume;
+          audio.volume = 0;
+          volumeSlider.value = 0;
+          volIconUp.classList.add('hidden');
+          volIconMute.classList.remove('hidden');
+        } else {
+          audio.volume = previousVolume > 0 ? previousVolume : 1;
+          volumeSlider.value = audio.volume;
+          volIconUp.classList.remove('hidden');
+          volIconMute.classList.add('hidden');
+        }
+      });
+
+      // ===== LÓGICA DEL PANEL DE CONTROL (COLAPSABLE Y YOUTUBE DYNAMICS) =====
+      /*
+      ==== FEED CONTROL PANEL ====
+      Use the Panel de Control on the website to update feed images.
+      Paste image URLs into the fields.
+      Click 'Actualizar Feed'.
+      Changes are saved automatically in the browser using localStorage.
+      */
+      
+      const cpHeader = document.getElementById('cp-header');
+      const cpWrapper = document.getElementById('cp-wrapper');
+      const cpChevron = document.getElementById('cp-chevron');
+      
+      const cpPassword = document.getElementById('cp-password');
+      const cpSubmit = document.getElementById('cp-submit');
+      const cpError = document.getElementById('cp-error');
+      const cpLoginForm = document.getElementById('cp-login-form');
+      const cpContent = document.getElementById('cp-content');
+      const cpLogout = document.getElementById('cp-logout');
+      
+      // Feed controls
+      const cpUpdateBtn = document.getElementById('cp-update-feed');
+      const cpSuccess = document.getElementById('cp-success');
+
+      // YouTube controls
+      /*
+      ==== YOUTUBE VIDEO CONTROL ====
+      Use the control panel to update the YouTube video.
+      Supported formats:
+      https://www.youtube.com/watch?v=VIDEO_ID
+      https://www.youtube.com/embed/VIDEO_ID
+      The system automatically converts standard links to embed format.
+      */
+      const cpYtUrl = document.getElementById('cp-yt-url');
+      const cpUpdateYt = document.getElementById('cp-update-yt');
+      const cpYtSuccess = document.getElementById('cp-yt-success');
+      const ytIframeElement = document.getElementById('yt-iframe');
+      const BASE_YT_URL = 'https://www.youtube.com/embed/jfKfPfyJRdk';
+
+      // 1. Manejo del colapso del panel
+      let isCpOpen = false;
+      cpHeader.addEventListener('click', () => {
+        isCpOpen = !isCpOpen;
+        cpWrapper.style.gridTemplateRows = isCpOpen ? '1fr' : '0fr';
+        cpChevron.style.transform = isCpOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+
+      // 2. Cargar imágenes guardadas de localStorage al iniciar la página
+      feedImages.forEach((img, idx) => {
+        const savedUrl = localStorage.getItem(`feedImage${idx + 1}`);
+        if (savedUrl) {
+          img.src = savedUrl;
+        }
+      });
+
+      // Load YT Video on init
+      const savedYtUrl = localStorage.getItem('ytVideoUrl');
+      if (savedYtUrl) {
+        ytIframeElement.src = savedYtUrl;
+      } else {
+        ytIframeElement.src = BASE_YT_URL;
+      }
+
+      // Helper for YouTube URL formatting
+      const formatYouTubeUrl = (url) => {
+        let videoId = '';
+        try {
+            if (url.includes('youtube.com/watch')) {
+                const urlObj = new URL(url);
+                videoId = urlObj.searchParams.get('v');
+            } else if (url.includes('youtu.be/')) {
+                videoId = url.split('youtu.be/')[1].split('?')[0];
+            } else if (url.includes('youtube.com/embed/')) {
+                return url; 
+            }
+        } catch (e) { }
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+      };
+
+      // 3. Lógica de autenticación
+      const handleLogin = () => {
+        if (cpPassword.value === 'selkitvibes2026') {
+          cpLoginForm.classList.add('hidden');
+          cpLoginForm.classList.remove('flex');
+          cpContent.classList.remove('hidden');
+          cpContent.classList.add('flex');
+          cpError.style.opacity = '0';
+          cpPassword.value = '';
+          
+          // Llenar inputs con URLs de localStorage (si existen)
+          for (let i = 1; i <= 6; i++) {
+            const savedUrl = localStorage.getItem(`feedImage${i}`);
+            if (savedUrl) {
+              document.getElementById(`feed-url-${i}`).value = savedUrl;
+            }
+          }
+
+          // Populate YT input
+          const savedYt = localStorage.getItem('ytVideoUrl');
+          if (savedYt) {
+             cpYtUrl.value = savedYt;
+          }
+        } else {
+          cpError.style.opacity = '1';
+          setTimeout(() => { cpError.style.opacity = '0'; }, 3000);
+        }
+      };
+
+      cpSubmit.addEventListener('click', handleLogin);
+      cpPassword.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleLogin();
+      });
+
+      cpLogout.addEventListener('click', () => {
+        cpContent.classList.add('hidden');
+        cpContent.classList.remove('flex');
+        cpLoginForm.classList.remove('hidden');
+        cpLoginForm.classList.add('flex');
+      });
+
+      // 4. Lógica para actualizar las imágenes del Feed
+      cpUpdateBtn.addEventListener('click', () => {
+        let updated = false;
+        for (let i = 1; i <= 6; i++) {
+          const input = document.getElementById(`feed-url-${i}`);
+          if (input && input.value.trim() !== "") {
+            feedImages[i - 1].src = input.value.trim();
+            localStorage.setItem(`feedImage${i}`, input.value.trim());
+            updated = true;
+          }
+        }
+        
+        if (updated) {
+          cpSuccess.style.opacity = '1';
+          setTimeout(() => { cpSuccess.style.opacity = '0'; }, 3000);
+        }
+      });
+
+      // 5. Lógica para actualizar YouTube Video
+      cpUpdateYt.addEventListener('click', () => {
+        const rawUrl = cpYtUrl.value.trim();
+        if (rawUrl === '') {
+            localStorage.removeItem('ytVideoUrl');
+            ytIframeElement.src = BASE_YT_URL;
+            showYtSuccess();
+        } else {
+            const formatted = formatYouTubeUrl(rawUrl);
+            localStorage.setItem('ytVideoUrl', formatted);
+            ytIframeElement.src = formatted;
+            showYtSuccess();
+        }
+      });
+
+      function showYtSuccess() {
+        cpYtSuccess.style.opacity = '1';
+        setTimeout(() => { cpYtSuccess.style.opacity = '0'; }, 3000);
+      }
+
+    });
+  </script>
+</body>
+</html>
