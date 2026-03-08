@@ -1,15 +1,11 @@
 {
-  "profile": {
-    "name": "Selkit",
-    "avatar": "https://tuweb.com/avatar.jpg"
-  },
-  "media": {
-    "image": "https://tuweb.com/default-image.jpg",
-    "video": "https://www.youtube.com/embed/default"
-  },
-  "stats": {
-    "following": 100,
-    "followers": 2500,
-    "likes": 780
-  }
+  "feedImages": [
+    "https://i.imgur.com/HnTzlUx.jpeg",
+    "https://i.imgur.com/irKItNk.jpeg",
+    "https://i.imgur.com/cESV5Gf.jpeg",
+    "https://i.imgur.com/a9xN7mi.jpeg",
+    "https://i.imgur.com/USXJ9fm.jpeg",
+    "https://i.imgur.com/0KPqRpg.jpeg"
+  ],
+  "ytVideoUrl": "https://www.youtube.com/embed/jfKfPfyJRdk"
 }
