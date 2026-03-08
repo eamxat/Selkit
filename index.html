@@ -650,6 +650,13 @@
       enterBtn.addEventListener('click', () => {
         splashScreen.style.opacity = '0';
         splashScreen.style.pointerEvents = 'none';
+        
+        // Auto-play music using the existing player controls
+        const audio = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        if (audio && audio.paused && playPauseBtn) {
+          playPauseBtn.click();
+        }
       });
 
       // ===== LÓGICA DE NOTIFICACIÓN DE CHAT =====
