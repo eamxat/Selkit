@@ -1,0 +1,15 @@
+{
+  "profile": {
+    "name": "Selkit",
+    "avatar": "https://tuweb.com/avatar.jpg"
+  },
+  "media": {
+    "image": "https://tuweb.com/default-image.jpg",
+    "video": "https://www.youtube.com/embed/default"
+  },
+  "stats": {
+    "following": 100,
+    "followers": 2500,
+    "likes": 780
+  }
+}
