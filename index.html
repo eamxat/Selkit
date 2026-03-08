@@ -177,25 +177,15 @@
   /* =========================================
      NUEVAS CLASES: ZOOM AVATAR, NIGHT MODE
   ========================================= */
-  .avatar-zoomed {
-    transform: scale(2.2) !important;
-    z-index: 100 !important;
-    position: relative;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+  #profile-avatar {
+    overflow: visible !important;
   }
-  #avatar-dim-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(2px);
-    z-index: 90;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+  #profile-avatar img {
+    border-radius: 9999px;
+    transition: transform 0.25s ease;
   }
-  #avatar-dim-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+  #profile-avatar img:hover {
+    transform: scale(1.25);
   }
 
   /* NIGHT MODE */
@@ -268,6 +258,48 @@
   @keyframes neon-pulse-dark {
     0% { text-shadow: 0 0 10px rgba(255,255,255,0.2), 0 0 20px rgba(184,58,112,0.7), 0 0 30px rgba(184,58,112,0.5), 1px 1px 0px #8A2E55, 2px 2px 0px #B83A70, 3px 3px 0px #1F4A70, 4px 4px 0px #163859, 5px 5px 15px rgba(30,30,40,0.7); }
     100% { text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 25px rgba(214,90,141,1), 0 0 45px rgba(214,90,141,0.9), 1px 1px 0px #8A2E55, 2px 2px 0px #B83A70, 3px 3px 0px #1F4A70, 4px 4px 0px #163859, 5px 5px 20px rgba(30,30,40,0.9); }
+  }
+
+  /* =========================================================
+     CROSS-BROWSER COMPATIBILITY: PANEL DE CONTROL
+  ========================================================= */
+  
+  /* Eliminar estilos por defecto de iOS/Safari en botones e inputs */
+  #control-panel-section input,
+  #control-panel-section button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent; /* Evita el destello gris al tocar en móviles */
+    outline: none;
+    margin: 0;
+  }
+
+  /* Asegurar que el efecto cristal (Glassmorphism) funcione en Safari/Webkit */
+  #control-panel-section .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Corrección de opacidad y color en los placeholders para Safari y Firefox */
+  #control-panel-section input::-webkit-input-placeholder { color: #6B6B6B; opacity: 1; }
+  #control-panel-section input::-moz-placeholder { color: #6B6B6B; opacity: 1; }
+  #control-panel-section input:-ms-input-placeholder { color: #6B6B6B; opacity: 1; }
+  
+  body.dark-theme #control-panel-section input::-webkit-input-placeholder { color: #A8A8A8; }
+  body.dark-theme #control-panel-section input::-moz-placeholder { color: #A8A8A8; }
+  body.dark-theme #control-panel-section input:-ms-input-placeholder { color: #A8A8A8; }
+
+  /* Prevenir el auto-zoom de iOS Safari al enfocar un input */
+  #control-panel-section input {
+    font-size: 16px !important; /* iOS hace zoom automático si la fuente es menor a 16px */
+  }
+  
+  /* Ajuste de escala segura para transiciones en todos los motores */
+  #cp-wrapper {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: grid-template-rows;
   }
 </style>
 </head>
@@ -398,7 +430,7 @@
       <!-- Profile card (Medio Derecha) -->
       <div class="widget-panel absolute right-6 top-[150px] w-[150px] bg-white/50 text-[#3A3A3A] p-3 rounded-xl backdrop-blur-md border border-white/50 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/70 z-20">
         <div class="flex items-center gap-2">
-          <div id="profile-avatar" class="w-8 h-8 rounded-full bg-white/60 border border-white/60 overflow-hidden shrink-0 cursor-pointer hover:scale-110 transition-transform relative z-20">
+          <div id="profile-avatar" class="w-8 h-8 rounded-full bg-white/60 border border-white/60 overflow-visible shrink-0 cursor-pointer relative z-20">
             <img src="https://i.imgur.com/9rdW1Lq.jpeg" class="w-full h-full object-cover" alt="Avatar"/>
           </div>
           <div class="cursor-default flex-1 overflow-hidden">
@@ -698,28 +730,6 @@
         }
       });
 
-      // ===== PROFILE AVATAR ZOOM =====
-      const profileAvatar = document.getElementById('profile-avatar');
-      
-      const avatarOverlay = document.createElement('div');
-      avatarOverlay.id = 'avatar-dim-overlay';
-      document.body.appendChild(avatarOverlay);
-      
-      // Ensure smooth transition for hover scale (approx 0.3s)
-      profileAvatar.style.transition = 'all 0.3s ease';
-
-      profileAvatar.addEventListener('mouseenter', () => {
-        profileAvatar.classList.add('avatar-zoomed');
-        profileAvatar.classList.remove('hover:scale-110');
-        avatarOverlay.classList.add('active');
-      });
-      
-      profileAvatar.addEventListener('mouseleave', () => {
-        profileAvatar.classList.remove('avatar-zoomed');
-        profileAvatar.classList.add('hover:scale-110');
-        avatarOverlay.classList.remove('active');
-      });
-
       // ===== NIGHT MODE TOGGLE =====
       const themeToggleBtn = document.getElementById('theme-toggle-btn');
       themeToggleBtn.addEventListener('click', (e) => {
@@ -1007,14 +1017,6 @@
       });
 
       // ===== LÓGICA DEL PANEL DE CONTROL (COLAPSABLE Y YOUTUBE DYNAMICS) =====
-      /*
-      ==== FEED CONTROL PANEL ====
-      Use the Panel de Control on the website to update feed images.
-      Paste image URLs into the fields.
-      Click 'Actualizar Feed'.
-      Changes are saved automatically in the browser using localStorage.
-      */
-      
       const cpHeader = document.getElementById('cp-header');
       const cpWrapper = document.getElementById('cp-wrapper');
       const cpChevron = document.getElementById('cp-chevron');
@@ -1031,43 +1033,28 @@
       const cpSuccess = document.getElementById('cp-success');
 
       // YouTube controls
-      /*
-      ==== YOUTUBE VIDEO CONTROL ====
-      Use the control panel to update the YouTube video.
-      Supported formats:
-      https://www.youtube.com/watch?v=VIDEO_ID
-      https://www.youtube.com/embed/VIDEO_ID
-      The system automatically converts standard links to embed format.
-      */
       const cpYtUrl = document.getElementById('cp-yt-url');
       const cpUpdateYt = document.getElementById('cp-update-yt');
       const cpYtSuccess = document.getElementById('cp-yt-success');
       const ytIframeElement = document.getElementById('yt-iframe');
       const BASE_YT_URL = 'https://www.youtube.com/embed/jfKfPfyJRdk';
 
-      // 1. Manejo del colapso del panel
-      let isCpOpen = false;
-      cpHeader.addEventListener('click', () => {
-        isCpOpen = !isCpOpen;
-        cpWrapper.style.gridTemplateRows = isCpOpen ? '1fr' : '0fr';
-        cpChevron.style.transform = isCpOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-      });
+      // =========================================================
+      // NUEVA INTEGRACIÓN GITHUB ACTIONS & JSON GLOBAL
+      // =========================================================
+      
+      const GH_CONFIG = {
+          owner: 'TU_USUARIO',       // Reemplaza con tu usuario de GitHub
+          repo: 'TU_REPOSITORIO',    // Reemplaza con el nombre de tu repositorio
+          workflow: 'update-profile.yml',
+          token: 'TU_TOKEN_AQUI',    // IMPORTANTE: Usa un Fine-Grained PAT (ver notas)
+          branch: 'main'             // 'main' o 'master'
+      };
 
-      // 2. Cargar imágenes guardadas de localStorage al iniciar la página
-      feedImages.forEach((img, idx) => {
-        const savedUrl = localStorage.getItem(`feedImage${idx + 1}`);
-        if (savedUrl) {
-          img.src = savedUrl;
-        }
-      });
-
-      // Load YT Video on init
-      const savedYtUrl = localStorage.getItem('ytVideoUrl');
-      if (savedYtUrl) {
-        ytIframeElement.src = savedYtUrl;
-      } else {
-        ytIframeElement.src = BASE_YT_URL;
-      }
+      let currentProfileData = {
+          feedImages: ["", "", "", "", "", ""],
+          ytVideoUrl: BASE_YT_URL
+      };
 
       // Helper for YouTube URL formatting
       const formatYouTubeUrl = (url) => {
@@ -1085,6 +1072,46 @@
         return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
       };
 
+      // 1. Manejo del colapso del panel
+      let isCpOpen = false;
+      cpHeader.addEventListener('click', () => {
+        isCpOpen = !isCpOpen;
+        cpWrapper.style.gridTemplateRows = isCpOpen ? '1fr' : '0fr';
+        cpChevron.style.transform = isCpOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+
+      // 2. Cargar datos globales desde profile-data.json
+      const loadGlobalData = () => {
+          const initTimestamp = new Date().getTime();
+          fetch(`profile-data.json?nocache=${initTimestamp}`)
+              .then(res => res.json())
+              .then(data => {
+                  if (data) currentProfileData = data;
+                  
+                  // Aplicar imágenes del Feed
+                  if (data.feedImages) {
+                      feedImages.forEach((img, idx) => {
+                          if (data.feedImages[idx]) {
+                              const separator = data.feedImages[idx].includes('?') ? '&' : '?';
+                              img.src = `${data.feedImages[idx]}${separator}nocache=${initTimestamp}`;
+                          }
+                      });
+                  }
+
+                  // Aplicar video de YouTube
+                  if (data.ytVideoUrl) {
+                      const separator = data.ytVideoUrl.includes('?') ? '&' : '?';
+                      ytIframeElement.src = `${data.ytVideoUrl}${separator}nocache=${initTimestamp}`;
+                  } else {
+                      ytIframeElement.src = `${BASE_YT_URL}?nocache=${initTimestamp}`;
+                  }
+              })
+              .catch(err => console.error("Error cargando perfil global (puede ser normal si el JSON aún no existe):", err));
+      };
+
+      // Ejecutar carga al abrir la página
+      loadGlobalData();
+
       // 3. Lógica de autenticación
       const handleLogin = () => {
         if (cpPassword.value === 'selkitvibes2026') {
@@ -1095,18 +1122,14 @@
           cpError.style.opacity = '0';
           cpPassword.value = '';
           
-          // Llenar inputs con URLs de localStorage (si existen)
+          // Llenar inputs con los datos cargados desde el JSON
           for (let i = 1; i <= 6; i++) {
-            const savedUrl = localStorage.getItem(`feedImage${i}`);
-            if (savedUrl) {
-              document.getElementById(`feed-url-${i}`).value = savedUrl;
+            if (currentProfileData.feedImages[i - 1]) {
+              document.getElementById(`feed-url-${i}`).value = currentProfileData.feedImages[i - 1];
             }
           }
-
-          // Populate YT input
-          const savedYt = localStorage.getItem('ytVideoUrl');
-          if (savedYt) {
-             cpYtUrl.value = savedYt;
+          if (currentProfileData.ytVideoUrl) {
+             cpYtUrl.value = currentProfileData.ytVideoUrl;
           }
         } else {
           cpError.style.opacity = '1';
@@ -1126,37 +1149,86 @@
         cpLoginForm.classList.add('flex');
       });
 
-      // 4. Lógica para actualizar las imágenes del Feed
-      cpUpdateBtn.addEventListener('click', () => {
+      // Función para enviar la petición a GitHub Actions
+      const updateGitHubAction = async () => {
+          const originalBtnText = cpUpdateBtn.innerText;
+          const originalYtBtnText = cpUpdateYt.innerText;
+          
+          cpUpdateBtn.innerText = "Guardando...";
+          cpUpdateYt.innerText = "Guardando...";
+          
+          try {
+              const response = await fetch(`https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/actions/workflows/${GH_CONFIG.workflow}/dispatches`, {
+                  method: 'POST',
+                  headers: {
+                      'Accept': 'application/vnd.github.v3+json',
+                      'Authorization': `Bearer ${GH_CONFIG.token}`,
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                      ref: GH_CONFIG.branch,
+                      inputs: { profileData: JSON.stringify(currentProfileData) }
+                  })
+              });
+
+              cpUpdateBtn.innerText = "Actualizar Feed";
+              cpUpdateYt.innerText = "Actualizar Video";
+
+              if (response.ok) return true;
+              console.error('Error GitHub API:', await response.text());
+              return false;
+          } catch (error) {
+              console.error('Error de red:', error);
+              cpUpdateBtn.innerText = "Actualizar Feed";
+              cpUpdateYt.innerText = "Actualizar Video";
+              return false;
+          }
+      };
+
+      // 4. Lógica para actualizar las imágenes del Feed en la nube
+      cpUpdateBtn.addEventListener('click', async () => {
         let updated = false;
+        const updateTimestamp = new Date().getTime();
+        
         for (let i = 1; i <= 6; i++) {
           const input = document.getElementById(`feed-url-${i}`);
           if (input && input.value.trim() !== "") {
-            feedImages[i - 1].src = input.value.trim();
-            localStorage.setItem(`feedImage${i}`, input.value.trim());
+            const rawUrl = input.value.trim();
+            currentProfileData.feedImages[i - 1] = rawUrl;
+            
+            // Actualización visual inmediata local
+            const separator = rawUrl.includes('?') ? '&' : '?';
+            feedImages[i - 1].src = `${rawUrl}${separator}nocache=${updateTimestamp}`;
             updated = true;
           }
         }
         
         if (updated) {
-          cpSuccess.style.opacity = '1';
-          setTimeout(() => { cpSuccess.style.opacity = '0'; }, 3000);
+          const success = await updateGitHubAction();
+          if (success) {
+              cpSuccess.style.opacity = '1';
+              setTimeout(() => { cpSuccess.style.opacity = '0'; }, 3000);
+          }
         }
       });
 
-      // 5. Lógica para actualizar YouTube Video
-      cpUpdateYt.addEventListener('click', () => {
+      // 5. Lógica para actualizar YouTube Video en la nube
+      cpUpdateYt.addEventListener('click', async () => {
         const rawUrl = cpYtUrl.value.trim();
+        const updateTimestamp = new Date().getTime();
+        
         if (rawUrl === '') {
-            localStorage.removeItem('ytVideoUrl');
-            ytIframeElement.src = BASE_YT_URL;
-            showYtSuccess();
+            currentProfileData.ytVideoUrl = BASE_YT_URL;
+            ytIframeElement.src = `${BASE_YT_URL}?nocache=${updateTimestamp}`;
         } else {
             const formatted = formatYouTubeUrl(rawUrl);
-            localStorage.setItem('ytVideoUrl', formatted);
-            ytIframeElement.src = formatted;
-            showYtSuccess();
+            currentProfileData.ytVideoUrl = formatted;
+            const separator = formatted.includes('?') ? '&' : '?';
+            ytIframeElement.src = `${formatted}${separator}nocache=${updateTimestamp}`;
         }
+
+        const success = await updateGitHubAction();
+        if (success) showYtSuccess();
       });
 
       function showYtSuccess() {
@@ -1169,3 +1241,4 @@
 </body>
 
 </html>
+
