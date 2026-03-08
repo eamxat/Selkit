@@ -1,0 +1,31 @@
+name: Update Profile Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      profileData:
+        description: 'JSON de actualización'
+        required: true
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Actualizar profile-data.json
+        env:
+          PROFILE_DATA: ${{ github.event.inputs.profileData }}
+        run: |
+          echo "$PROFILE_DATA" > profile-data.json
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add profile-data.json
+          git commit -m "Update profile data via Control Panel" || echo "Sin cambios para commitear"
+          git push
